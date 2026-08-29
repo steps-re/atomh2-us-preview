@@ -281,5 +281,45 @@
       "h2_round_trip": 0.35,
       "load_kw": 0.5
     }
+  },
+  "global": {
+    "global_offgrid_towers": 390312,
+    "by_region": {
+      "Africa": 145250,
+      "S Asia": 79800,
+      "Europe": 66600,
+      "SE Asia": 38050,
+      "Lat Am": 30800,
+      "MENA": 20550,
+      "C Asia": 5500,
+      "N Am": 2950,
+      "Pacific": 812
+    },
+    "n_am_share_pct": 0.76,
+    "africa_share_pct": 37.2,
+    "africa_to_namerica_ratio": 49.0,
+    "owners": [
+      {
+        "name": "American Tower",
+        "hq": "Boston, MA",
+        "sites": "220,000+",
+        "africa": "28,000 towers",
+        "latam": "~47,000 towers"
+      },
+      {
+        "name": "SBA Communications",
+        "hq": "Boca Raton, FL",
+        "sites": "46,328",
+        "africa": "expanding by new build",
+        "latam": "12,000+ in Brazil"
+      },
+      {
+        "name": "Phoenix Tower International",
+        "hq": "Boca Raton, FL",
+        "sites": "30,000+ in 24 countries",
+        "africa": "limited",
+        "latam": "LatAm and Caribbean weighted"
+      }
+    ]
   }
 }

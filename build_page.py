@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 D = json.loads((ROOT / "us_screen.json").read_text())
 AK, TW, KZ, ASR = D["alaska"], D["alaska_towers"], D["kotzebue"], D["asr"]
+GL = D["global"]
 MONTHS = list(KZ["ghi_kwh_m2_day"])
 
 
@@ -115,6 +116,7 @@ def owner_rows():
 
 
 P = AK["usd_per_gal"]
+o = GL["owners"]
 HTML = f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -189,28 +191,28 @@ a{{color:var(--brick)}}
 <header><div class="wrap">
   <span class="label">Steps Ventures</span>
   <a href="#finding">Finding</a><a href="#logistics">Logistics</a><a href="#physics">Physics</a>
-  <a href="#towers">Towers</a><a href="#plan">Plan</a><a href="#capital">Capital</a>
+  <a href="#towers">Towers</a><a href="#owners">Owners</a><a href="#plan">Plan</a><a href="#capital">Capital</a>
 </div></header>
 
 <main class="wrap">
 
 <div class="hero">
   <span class="label-brick">August 2026 · Field study · United States · prepared for Atom H2</span>
-  <h1 class="serif">American diesel is cheap. That is the whole problem, and it changes where you should stand.</h1>
-  <p class="lede">The obvious US pitch is that remote America burns expensive diesel. It does not.
-  Alaska's utilities publish what they actually pay, and the median delivered price is
-  <b>${P['50%']:.2f} a gallon</b>, about <b>${AK['usd_per_litre_median']:.2f} a litre</b>, roughly
-  {AK['us_vs_europe_ratio']:.2f}× the ${AK['europe_model_mean_usd_l']:.2f}/L the European model assumed.
-  A fuel-price arbitrage that works in Europe gets weaker on crossing the Atlantic, not stronger.
-  What is scarce in the United States is not the fuel. It is the delivery, and the daylight.</p>
+  <h1 class="serif">The towers are not in America. The owners are.</h1>
+  <p class="lede">North America holds <b>{GL['n_am_share_pct']}%</b> of the world's off-grid telecom
+  towers. Africa holds {GL['africa_share_pct']}%, some <b>{GL['africa_to_namerica_ratio']:.0f} times</b>
+  more. So the United States is not a market to sell into. It is where a very large share of the
+  world's off-grid towers is <b>owned</b>, from two cities. This study measures the American
+  ground carefully, finds it thin, and says what to do instead.</p>
 
   <div class="stats">
+    <div class="stat"><div class="n">{GL['n_am_share_pct']}%</div>
+      <div class="c">North America's share of the {f(GL['global_offgrid_towers'])} off-grid
+      telecom towers worldwide</div></div>
     <div class="stat"><div class="n">${P['50%']:.2f}</div>
-      <div class="c">Median invoiced delivered diesel, {AK['communities_reporting_fuel']} remote
-      Alaska communities, FY{AK['data_year_mode']}</div></div>
-    <div class="stat"><div class="n">${f(AK['fuel_spend_usd_per_yr']/1e6)}M</div>
-      <div class="c">Annual fuel spend across those communities, on
-      {f(AK['diesel_gal_per_yr']/1e6,1)}M gallons</div></div>
+      <div class="c">Median invoiced delivered diesel across {AK['communities_reporting_fuel']}
+      remote Alaska communities, or ${AK['usd_per_litre_median']:.2f}/L against the
+      ${AK['europe_model_mean_usd_l']:.2f}/L Europe assumed</div></div>
     <div class="stat"><div class="n">{TW['near_a_diesel_community']}</div>
       <div class="c">Registered Alaska structures within {TW['within_km']:.0f} km of one of
       them. {TW['near_ge_6_usd_gal']} of those sit near a community paying $6+/gal</div></div>
@@ -360,8 +362,54 @@ a{{color:var(--brick)}}
   </div>
 </section>
 
+<section id="owners">
+  <span class="label">V. Where this points</span>
+  <h2 class="serif">Two cities hold the decision</h2>
+  <p>Alaska is a proof, not a business. The business is that a very large share of the world's
+  off-grid towers is owned by companies headquartered a train ride and a short flight from New
+  York. Energy runs up to 60% of tower operating cost at remote African sites, Vodacom's African
+  energy bill was around $300M in 2025, and diesel powers the majority of Africa's roughly 500,000
+  towers. Nobody in that chain has to be persuaded there is a problem.</p>
+
+  <div class="cols">
+    <div class="card"><span class="label-brick">{o[0]['hq']}</span>
+      <h3>{o[0]['name']}</h3>
+      <ul>
+        <li>Sites worldwide <b>{o[0]['sites']}</b></li>
+        <li>Africa: {o[0]['africa']}</li>
+        <li>Latin America: {o[0]['latam']}</li>
+      </ul>
+    </div>
+    <div class="card"><span class="label-brick">{o[1]['hq']}</span>
+      <h3>{o[1]['name']}</h3>
+      <ul>
+        <li>Sites worldwide <b>{o[1]['sites']}</b></li>
+        <li>Africa: {o[1]['africa']}</li>
+        <li>Latin America: {o[1]['latam']}</li>
+      </ul>
+    </div>
+    <div class="card"><span class="label-brick">{o[2]['hq']}</span>
+      <h3>{o[2]['name']}</h3>
+      <ul>
+        <li>Sites worldwide <b>{o[2]['sites']}</b></li>
+        <li>Africa: {o[2]['africa']}</li>
+        <li>Latin America: {o[2]['latam']}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="flag">
+    <h3>Do not walk in fighting solar</h3>
+    <p style="margin:.4em 0 0">African towercos are electrifying fast and are proud of it. Atlas
+    Tower Kenya has 82% of sites on solar and is adding 300 more. A pitch that sounds like
+    "replace your diesel" is heard as "replace the solar programme I just got approved". Sell the
+    <b>long-duration layer that sits on top of the solar they already bought</b>, priced on site
+    availability and litres avoided rather than round-trip efficiency.</p>
+  </div>
+</section>
+
 <section id="plan">
-  <span class="label">V. The three months</span>
+  <span class="label">VI. The three months</span>
   <h2 class="serif">What a visit should actually produce</h2>
   <p>Two constraints shape everything below. The exchange is committed to Newlab in the
   Brooklyn Navy Yard, so Alaska is a set of sorties from that base rather than a relocation. And
@@ -372,45 +420,47 @@ a{{color:var(--brick)}}
 
   <div class="plan">
     <div class="month">
-      <div class="when serif">Month one<small>Oct · Newlab base, one sortie</small></div>
+      <div class="when serif">Month one<small>Oct · Boston and Boca Raton</small></div>
       <ul>
-        <li><b>Alaska Rural Energy Conference, Fairbanks, 27–29 Oct</b> (pre-conference 26th).
-        The single highest-density room of remote-diesel operators in the United States. Go with
-        the seasonal-resource figure, not a product brochure.</li>
-        <li>If arrival allows, the <b>Alaska Power Association 75th Annual Meeting, Anchorage,
-        29 Sep – 2 Oct</b> puts the utility establishment in one place first.</li>
-        <li>Open GCI directly. They own {TW['top_owners'].get('GCI Communication Corp', 0)} of the
-        {TW['near_a_diesel_community']} relevant structures and operate TERRA. One meeting covers
-        more of the estate than every other owner combined.</li>
-        <li>Meet Launch Alaska. Their Tech Deployment Track exists specifically to place outside
-        technology into Alaska communities, backed by ONR and DOE. Applications are closed;
-        file the expression of interest while you are in the room.</li>
+        <li><b>Boston, for American Tower.</b> 220,000+ sites worldwide, 28,000 in Africa, about
+        four hours from Brooklyn by train. They already sell backup power as a service using
+        diesel, so the business model is proven internally and only the fuel is in question.</li>
+        <li><b>Boca Raton, for SBA and Phoenix Tower International in one visit.</b> Two of the
+        three targets share a town. Phoenix Tower is the warmest door, since Steps already has a
+        Blackstone relationship and a drafted approach that was never sent.</li>
+        <li>Ask for the person who owns the <b>energy cost line</b> for the African or Brazilian
+        portfolio, not the sustainability team. Sustainability will take the meeting and cannot
+        sign.</li>
+        <li>Use Newlab for what it is good at. Six hundred deep-tech members, investor sessions
+        and a steady event schedule make it a rehearsal room for a technical founder learning to
+        carry a commercial pitch alone in English.</li>
       </ul>
     </div>
     <div class="month">
       <div class="when serif">Month two<small>Nov · the long sortie</small></div>
       <ul>
-        <li>November is the point. Be in Alaska while the sun is gone and the wind is at
-        {KZ['wind_dark_mean']} m/s. Those are the conditions that make the argument, and you can collect site data
-        no European dataset contains.</li>
-        <li>Convert one operator into a <b>funded winter field trial</b> for 2027: instrumented,
-        third-party measured, on a real relay site. That is the asset the company lacks and every
-        investor asks for.</li>
-        <li><b>RE+, Las Vegas, 16–19 Nov</b> is North America's largest clean-energy event. It
-        clashes with the NWPPA Alaska Electric Utility Conference in Anchorage on the same dates.
-        Pick one. RE+ if the goal is capital and partners; NWPPA if the goal is Alaskan buyers.</li>
-        <li>Start the entity question, because it gates everything after (see below).</li>
+        <li><b>One Alaska sortie</b> around the Rural Energy Conference in Fairbanks, 27 to 29
+        October, with a site visit while the sun is gone and the wind is at {KZ['wind_dark_mean']} m/s.
+        Come back with a reference site and a winter measurement agreement. One trip, not a
+        residency.</li>
+        <li><b>Convert one towerco into a paid multi-site pilot.</b> A named country, five to ten
+        instrumented sites, an agreed measurement scope and a stated expansion trigger. This is the
+        deliverable of the whole three months.</li>
+        <li><b>RE+, Las Vegas, 16–19 Nov</b> is North America's largest clean-energy event and
+        the towercos and their suppliers are there. Worth it only if a Boston or Boca Raton meeting
+        has already landed and you are widening, not prospecting.</li>
+        <li>Open the NATO Innovation Fund in parallel. European capital, no ownership friction,
+        and Atom H2 is already a DIANA company.</li>
       </ul>
     </div>
     <div class="month">
       <div class="when serif">Month three<small>Dec · back at Newlab</small></div>
       <ul>
-        <li>Turn conversations into paper: a letter of intent for the winter trial, a named
-        host site, a scope of measurement, and who pays for what.</li>
-        <li>Target the <b>Alaska Energy Authority Renewable Energy Fund</b> for the round after
-        this one. Round 19 closes 11 Sep 2026, before arrival, and applications come from
-        utilities and communities, not vendors. Your role is named technology partner on
-        somebody else's application, so the relationship has to exist months ahead.</li>
+        <li>Turn conversations into paper before US corporate calendars close in the third week
+        of December: a letter of intent, a named country and site count, a measurement scope, and
+        who pays for what.</li>
+        <li>Write the costed subsidiary plan properly. If a towerco pilot lands then a US
+        contracting entity stops being theoretical, and the plan already promises the document.</li>
         <li>Leave before the ESTA 90 days expire. A 1 October arrival means departing by roughly
         29 December. Write 90 days, never "1 Oct to 31 Dec", which is 91.</li>
       </ul>
@@ -419,14 +469,14 @@ a{{color:var(--brick)}}
 </section>
 
 <section id="capital">
-  <span class="label">VI. Capital</span>
+  <span class="label">VII. Capital</span>
   <h2 class="serif">The honest read on American money</h2>
   <div class="cols">
-    <div class="card"><span class="label">Closed for now</span><h3>Federal SBIR</h3>
-      <p style="font-size:14.5px;margin:.4em 0 0">Requires at least 51% ownership by US citizens
-      or permanent residents. The April 2026 reauthorisation added mandatory foreign-risk
-      screening to every submission with no exceptions. A Barcelona company is not eligible, and
-      a thin US subsidiary does not fix it. Do not build a roadmap on DoD SBIR.</p></div>
+    <div class="card"><span class="label">The real one</span><h3>An order book</h3>
+      <p style="font-size:14.5px;margin:.4em 0 0">The capital event that matters is a framework
+      with an owner of tens of thousands of off-grid sites, which funds the descent from $160,000
+      a unit toward the $42,000 floor. No grant on offer in the United States moves that number.
+      Federal programmes are a distraction dressed as progress here.</p></div>
     <div class="card"><span class="label">Open, and a better fit</span><h3>NATO Innovation Fund</h3>
       <p style="font-size:14.5px;margin:.4em 0 0">A €1B multi-sovereign fund investing in dual-use
       technology including energy resilience. Atom H2 is already a DIANA company. European capital,
@@ -441,9 +491,9 @@ a{{color:var(--brick)}}
   </div>
   <div class="flag">
     <h3>Sequence, not a scattergun</h3>
-    <p style="margin:.4em 0 0">Field data first, then capital. A measured Arctic winter on a real
-    site is worth more to a European investor than any number of American meetings, and it is the
-    one thing three months in Alaska can produce that Barcelona cannot.</p>
+    <p style="margin:.4em 0 0">Customer first, then capital. A signed multi-site pilot with a
+    US-headquartered tower owner, plus one measured Arctic winter as the physics proof, is worth
+    more to any investor than a season of American meetings. Raise on that, in Europe.</p>
   </div>
 </section>
 
