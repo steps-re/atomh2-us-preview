@@ -378,6 +378,7 @@ a{{color:var(--brick)}}
         <li>Sites worldwide <b>{o[0]['sites']}</b></li>
         <li>Africa: {o[0]['africa']}</li>
         <li>Latin America: {o[0]['latam']}</li>
+        <li style="color:var(--mute);font-size:13px">{o[0]['note']}</li>
       </ul>
     </div>
     <div class="card"><span class="label-brick">{o[1]['hq']}</span>
@@ -386,6 +387,7 @@ a{{color:var(--brick)}}
         <li>Sites worldwide <b>{o[1]['sites']}</b></li>
         <li>Africa: {o[1]['africa']}</li>
         <li>Latin America: {o[1]['latam']}</li>
+        <li style="color:var(--mute);font-size:13px">{o[1]['note']}</li>
       </ul>
     </div>
     <div class="card"><span class="label-brick">{o[2]['hq']}</span>
@@ -394,6 +396,7 @@ a{{color:var(--brick)}}
         <li>Sites worldwide <b>{o[2]['sites']}</b></li>
         <li>Africa: {o[2]['africa']}</li>
         <li>Latin America: {o[2]['latam']}</li>
+        <li style="color:var(--mute);font-size:13px">{o[2]['note']}</li>
       </ul>
     </div>
   </div>
@@ -422,12 +425,18 @@ a{{color:var(--brick)}}
     <div class="month">
       <div class="when serif">Month one<small>Oct · Boston and Boca Raton</small></div>
       <ul>
-        <li><b>Boston, for American Tower.</b> 220,000+ sites worldwide, 28,000 in Africa, about
-        four hours from Brooklyn by train. They already sell backup power as a service using
-        diesel, so the business model is proven internally and only the fuel is in question.</li>
-        <li><b>Boca Raton, for SBA and Phoenix Tower International in one visit.</b> Two of the
-        three targets share a town. Phoenix Tower is the warmest door, since Steps already has a
-        Blackstone relationship and a drafted approach that was never sent.</li>
+        <li><b>Boston, for American Tower.</b> {f(int(str(o[0]['sites']).split()[0].replace(',','')))}
+        sites worldwide, {o[0]['africa']} in Africa and {o[0]['latam']} in Latin America, about four
+        hours from Brooklyn by train. That is around 70,000 sites in high-diesel geographies under
+        one roof, which is more than the other two targets combined. They already sell backup power
+        as a service using diesel, so the model is proven internally and only the fuel is in
+        question. This is the priority.</li>
+        <li><b>Boca Raton, for SBA and Phoenix Tower International in one visit.</b> Two targets
+        share a town, so make the trip once. SBA's prize is Brazil at roughly 30% of its estate;
+        its African presence is only South Africa and Tanzania. Phoenix Tower gives a warm
+        introduction through Steps' Blackstone relationship, but note Blackstone is a minority
+        holder among five investors and cannot direct the company, and PTI's estate has shifted to
+        Europe. Treat it as an introduction, not a shortcut.</li>
         <li>Ask for the person who owns the <b>energy cost line</b> for the African or Brazilian
         portfolio, not the sustainability team. Sustainability will take the meeting and cannot
         sign.</li>
@@ -505,7 +514,10 @@ a{{color:var(--brick)}}
   (FY{AK['data_year_mode']} for the majority of {AK['communities_in_programme']} communities;
   {AK['communities_reporting_fuel']} report fuel directly and the remainder report through a parent
   cooperative). Structure locations and owners are from the FCC Antenna Structure Registration
-  weekly dump. {ASR['caveat']}, so tower counts are a floor. Solar and wind are NASA POWER
+  weekly dump, re-verified 29 Aug 2026. {ASR['caveat']}, so tower counts are a floor.
+  Regional off-grid splits are <b>modelled estimates</b> from Atom H2's own 92-country model, not a
+  census, and are directional only. Operator site counts are from company reporting as dated on
+  each card. Solar and wind are NASA POWER
   climatology 2020–2024. Sizing figures are a screen, not an engineering study: single-point
   climatology, with no hourly simulation, no snow-cover or icing losses and no site survey.
   Every figure on this page is generated from <code>us_screen.json</code> by
