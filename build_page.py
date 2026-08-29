@@ -74,7 +74,7 @@ def seasonal_svg():
   <text x="{PADL-14}" y="{PADT-9}" text-anchor="start" font-size="10" fill="var(--mute)">kWh/m²/d</text>
   <text x="{W-PADR+9}" y="{PADT-9}" font-size="10" fill="var(--mute)">m/s</text>
 </svg></div>
-<figcaption><b>Fig. 01 — Kotzebue, Alaska ({KZ['lat']}°N).</b> Bars: solar irradiance.
+<figcaption><b>Fig. 01. Kotzebue, Alaska ({KZ['lat']}°N).</b> Bars: solar irradiance.
 Line: wind speed at 50 m. Monthly correlation <b>{KZ['solar_wind_monthly_corr']}</b>.
 Solar averages {KZ['ghi_dark_mean']} kWh/m²/d across Nov–Feb against
 {KZ['ghi_bright_mean']} in May–Aug; wind runs the other way,
@@ -120,7 +120,7 @@ HTML = f'''<!doctype html>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Atom H2 · United States field study</title>
 <meta name="description" content="Where a containerised solar-hydrogen system actually
-pencils in the United States — measured against Alaska's invoiced delivered diesel,
+pencils in the United States, measured against Alaska's invoiced delivered diesel,
 FCC tower registrations and NASA POWER resource data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -199,7 +199,7 @@ a{{color:var(--brick)}}
   <h1 class="serif">American diesel is cheap. That is the whole problem, and it changes where you should stand.</h1>
   <p class="lede">The obvious US pitch is that remote America burns expensive diesel. It does not.
   Alaska's utilities publish what they actually pay, and the median delivered price is
-  <b>${P['50%']:.2f} a gallon</b> — about <b>${AK['usd_per_litre_median']:.2f} a litre</b>, roughly
+  <b>${P['50%']:.2f} a gallon</b>, about <b>${AK['usd_per_litre_median']:.2f} a litre</b>, roughly
   {AK['us_vs_europe_ratio']:.2f}× the ${AK['europe_model_mean_usd_l']:.2f}/L the European model assumed.
   A fuel-price arbitrage that works in Europe gets weaker on crossing the Atlantic, not stronger.
   What is scarce in the United States is not the fuel. It is the delivery, and the daylight.</p>
@@ -213,7 +213,7 @@ a{{color:var(--brick)}}
       {f(AK['diesel_gal_per_yr']/1e6,1)}M gallons</div></div>
     <div class="stat"><div class="n">{TW['near_a_diesel_community']}</div>
       <div class="c">Registered Alaska structures within {TW['within_km']:.0f} km of one of
-      them — {TW['near_ge_6_usd_gal']} near a community paying $6+/gal</div></div>
+      them. {TW['near_ge_6_usd_gal']} of those sit near a community paying $6+/gal</div></div>
     <div class="stat"><div class="n">{KZ['solar_wind_monthly_corr']}</div>
       <div class="c">Solar-to-wind monthly correlation at Kotzebue. The resource that
       survives the dark season is wind</div></div>
@@ -225,7 +225,7 @@ a{{color:var(--brick)}}
   <h2 class="serif">The number that kills the easy version of the pitch</h2>
   <p>The European tower scan found {AK['europe_model_mean_usd_l']:.2f} USD/L of delivered
   diesel and 11,256 NPV-positive sites off the back of it. The instinct is that remote
-  America must be worse — bush planes, ice roads, single-barge resupply. The instinct is
+  America must be worse, on bush planes and ice roads and a single barge. The instinct is
   wrong, because American diesel carries almost no fuel tax and the American pump price
   starts far below the European one.</p>
 
@@ -283,7 +283,7 @@ a{{color:var(--brick)}}
     <p style="margin:.4em 0 0">Atom H2 is not competing with the cost of diesel in Alaska.
     It is competing with the <b>risk of a delivery that does not arrive</b>, and with the
     working capital tied up in a year of fuel bought in advance. Those are the two things a
-    buyer there will pay to remove — and neither of them appears anywhere in the European
+    buyer there will pay to remove, and neither of them appears anywhere in the European
     model's NPV.</p>
   </div>
 </section>
@@ -294,12 +294,12 @@ a{{color:var(--brick)}}
   <p>This is the part of the American case that is genuinely unique, and it is the reason to
   come here rather than to another high-diesel market. Above the Arctic Circle the solar
   resource does not merely dip in winter. It goes to zero. A battery cannot bridge a season.
-  Only a fuel can — which is why these communities burn diesel in the first place.</p>
+  Only a fuel can, which is why these communities burn diesel in the first place.</p>
   {seasonal_svg()}
 
   <h3 style="margin-top:44px">Can solar plus hydrogen carry a small site through the dark?</h3>
-  <p>Taking a {KZ['assumptions']['load_kw']} kW continuous load — a modest repeater or
-  monitoring site — at performance ratio {KZ['assumptions']['performance_ratio']} and a
+  <p>Taking a {KZ['assumptions']['load_kw']} kW continuous load, a modest repeater or
+  monitoring site, at performance ratio {KZ['assumptions']['performance_ratio']} and a
   {KZ['assumptions']['h2_round_trip']:.0%} power-to-hydrogen-to-power round trip:</p>
   <div class="tbl-scroll"><table>
     <thead><tr><th>PV array</th><th>Summer surplus (kWh)</th><th>Recoverable via H₂</th>
@@ -310,7 +310,7 @@ a{{color:var(--brick)}}
     <h3>Be honest about this, because a customer will check</h3>
     <p style="margin:.4em 0 .6em">A naively sized 5 kW array does <b>not</b> close even a
     {KZ['assumptions']['load_kw']} kW load. You need roughly <b>20 kW of panel</b> to bank enough summer
-    surplus to survive the winter through hydrogen — four times what the load suggests, on a
+    surplus to survive the winter through hydrogen. That is four times what the load suggests, on a
     structure that has to survive snow load and bears. And Atom H2's stated storage tops out at
     242 kWh, well under the dark-season deficit, so a real installation is a stack of tanks, not one box.</p>
     <p style="margin:0">The resource that is <b>abundant precisely when solar is gone</b> is wind:
@@ -326,7 +326,7 @@ a{{color:var(--brick)}}
   <p>Against the FCC's registration of {f(ASR['us_constructed_structures'])} constructed
   structures nationwide, Alaska holds {f(TW['ak_constructed'])}. Of those,
   <b>{TW['near_a_diesel_community']}</b> sit within {TW['within_km']:.0f} km of a community whose
-  delivered fuel price is published — {TW['near_ge_5_usd_gal']} near a community above $5/gal
+  delivered fuel price is published. {TW['near_ge_5_usd_gal']} sit near a community above $5/gal
   and <b>{TW['near_ge_6_usd_gal']}</b> above $6/gal.</p>
 
   <div class="cols">
@@ -341,7 +341,7 @@ a{{color:var(--brick)}}
         <tbody>{owner_rows()}</tbody></table></div>
       <p style="font-size:13.5px;color:#3B342C;margin-top:14px">One counterparty dominates.
       GCI also runs TERRA, a 3,300-mile fibre and microwave network reaching more than 45,000
-      people off the road system — an estate of small, remote, year-round powered relay sites
+      people off the road system. That is an estate of small, remote, year-round powered relay sites
       that is a far better fit for a kW-class box than any village powerhouse.</p>
     </div>
   </div>
@@ -350,30 +350,36 @@ a{{color:var(--brick)}}
     <h3>What this estate is not</h3>
     <p style="margin:.4em 0 0">A village power plant runs at hundreds of kW to megawatts.
     Atom H2's fuel cell is 2–6 kW. <b>Do not pitch the powerhouse.</b> The honest targets are
-    telecom relays, repeaters, monitoring and navigation sites, water and clinic backup — the
+    telecom relays, repeaters, monitoring and navigation sites, water and clinic backup. Those are the
     kW-class loads that sit beside the powerhouse and share its fuel problem.</p>
+    <p style="margin:.8em 0 0">It is also far smaller than the figure in circulation. There are
+    roughly 172,000 cell towers in the entire United States and about 419,000 sites once small
+    cells are counted, and essentially all of them are grid connected with diesel as backup. Any
+    claim of 300,000 off-grid or diesel-dependent US tower sites is the global off-grid count
+    mis-scaled, and it should not be repeated to a customer who can check it.</p>
   </div>
 </section>
 
 <section id="plan">
   <span class="label">V. The three months</span>
   <h2 class="serif">What a visit should actually produce</h2>
-  <p>One hard constraint shapes everything below. The exchange runs on ESTA, which permits
-  meetings, negotiation, conferences, site visits and market research — and <b>prohibits
-  productive work</b> for a US entity, paid or unpaid. No installing, no commissioning, no
-  running a deployment. This is a commercial trip that ends in signed intent and a funded
-  winter trial, not a trip that ends in a box on a pad.</p>
+  <p>Two constraints shape everything below. The exchange is committed to Newlab in the
+  Brooklyn Navy Yard, so Alaska is a set of sorties from that base rather than a relocation. And
+  it runs on ESTA, which permits meetings, negotiation, conferences, site visits and market
+  research, and <b>prohibits productive work</b> for a US entity, paid or unpaid. No installing,
+  no commissioning, no running a deployment. This ends in signed intent and a funded winter
+  trial, not in a box on a pad.</p>
 
   <div class="plan">
     <div class="month">
-      <div class="when serif">Month one<small>Oct · Anchorage &amp; Fairbanks</small></div>
+      <div class="when serif">Month one<small>Oct · Newlab base, one sortie</small></div>
       <ul>
         <li><b>Alaska Rural Energy Conference, Fairbanks, 27–29 Oct</b> (pre-conference 26th).
         The single highest-density room of remote-diesel operators in the United States. Go with
         the seasonal-resource figure, not a product brochure.</li>
         <li>If arrival allows, the <b>Alaska Power Association 75th Annual Meeting, Anchorage,
         29 Sep – 2 Oct</b> puts the utility establishment in one place first.</li>
-        <li>Open GCI directly — they own {TW['top_owners'].get('GCI Communication Corp', 0)} of the
+        <li>Open GCI directly. They own {TW['top_owners'].get('GCI Communication Corp', 0)} of the
         {TW['near_a_diesel_community']} relevant structures and operate TERRA. One meeting covers
         more of the estate than every other owner combined.</li>
         <li>Meet Launch Alaska. Their Tech Deployment Track exists specifically to place outside
@@ -382,10 +388,10 @@ a{{color:var(--brick)}}
       </ul>
     </div>
     <div class="month">
-      <div class="when serif">Month two<small>Nov · the winter test</small></div>
+      <div class="when serif">Month two<small>Nov · the long sortie</small></div>
       <ul>
         <li>November is the point. Be in Alaska while the sun is gone and the wind is at
-        {KZ['wind_dark_mean']} m/s — the conditions that make the argument — and collect site data
+        {KZ['wind_dark_mean']} m/s. Those are the conditions that make the argument, and you can collect site data
         no European dataset contains.</li>
         <li>Convert one operator into a <b>funded winter field trial</b> for 2027: instrumented,
         third-party measured, on a real relay site. That is the asset the company lacks and every
@@ -397,16 +403,16 @@ a{{color:var(--brick)}}
       </ul>
     </div>
     <div class="month">
-      <div class="when serif">Month three<small>Dec · convert and close out</small></div>
+      <div class="when serif">Month three<small>Dec · back at Newlab</small></div>
       <ul>
         <li>Turn conversations into paper: a letter of intent for the winter trial, a named
         host site, a scope of measurement, and who pays for what.</li>
         <li>Target the <b>Alaska Energy Authority Renewable Energy Fund</b> for the round after
-        this one. Round 19 closes 11 Sep 2026 — before arrival — and applications come from
+        this one. Round 19 closes 11 Sep 2026, before arrival, and applications come from
         utilities and communities, not vendors. Your role is named technology partner on
         somebody else's application, so the relationship has to exist months ahead.</li>
         <li>Leave before the ESTA 90 days expire. A 1 October arrival means departing by roughly
-        29 December — write 90 days, never "1 Oct to 31 Dec", which is 91.</li>
+        29 December. Write 90 days, never "1 Oct to 31 Dec", which is 91.</li>
       </ul>
     </div>
   </div>
@@ -430,7 +436,7 @@ a{{color:var(--brick)}}
       <p style="font-size:14.5px;margin:.4em 0 0">Hydrogen storage remains a niche venture bet;
       late-stage and growth rounds took over 90% of disclosed storage capital in 2026. A US
       Series A on a kW-scale hydrogen thesis without field data is a hard raise. Comparable
-      rounds — Photoncycle, PowerUP Energy — were led in Europe. Spend the three months making
+      rounds, Photoncycle and PowerUP Energy, were led in Europe. Spend the three months making
       the raise easier, not attempting it.</p></div>
   </div>
   <div class="flag">
@@ -447,11 +453,11 @@ a{{color:var(--brick)}}
   <p><b>Method.</b> Delivered diesel, gallons burned and diesel generation are per-community
   invoiced figures from the Alaska Energy Authority Power Cost Equalization programme
   (FY{AK['data_year_mode']} for the majority of {AK['communities_in_programme']} communities;
-  {AK['communities_reporting_fuel']} report fuel directly, the remainder report through a parent
+  {AK['communities_reporting_fuel']} report fuel directly and the remainder report through a parent
   cooperative). Structure locations and owners are from the FCC Antenna Structure Registration
-  weekly dump. {ASR['caveat']} — so tower counts are a floor. Solar and wind are NASA POWER
+  weekly dump. {ASR['caveat']}, so tower counts are a floor. Solar and wind are NASA POWER
   climatology 2020–2024. Sizing figures are a screen, not an engineering study: single-point
-  climatology, no hourly simulation, no snow-cover or icing losses, no site survey.
+  climatology, with no hourly simulation, no snow-cover or icing losses and no site survey.
   Every figure on this page is generated from <code>us_screen.json</code> by
   <code>build_page.py</code>; none is hand-entered.</p>
   <p style="margin-top:18px"><b>Disclosure.</b> Steps Ventures is a paid consultant to Atom H2.
